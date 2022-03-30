@@ -1,9 +1,13 @@
 .header-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 5rem;
   background: var(--darkblue-color);
   display: grid;
   align-items: center;
+  z-index: 99;
 }
 
 nav {
@@ -14,8 +18,39 @@ nav {
   justify-content: space-between;
 }
 
+.hamburger-menu {
+  font-size: 1.5rem;
+  color: var(--lightblue-color);
+}
+
+.menu-bar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%;
+  height: 100vh;
+  background: var(--blue-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.close-btn {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  color: var(--lightblue-color);
+  font-size: 1.5rem;
+}
+
+.hidden {
+  transform: translateX(100%);
+}
+
 ul {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 4rem;
@@ -50,4 +85,18 @@ li button {
 li button:hover {
   background: var(--blue-color);
   transition: all 0.5s ease;
+}
+
+@media screen and (min-width: 768px) {
+  
+}
+
+@media screen and (min-width: 1024px) {
+  .header-wrapper{
+    position: relative;
+  }
+
+  ul {
+    flex-direction: row;
+  }
 }

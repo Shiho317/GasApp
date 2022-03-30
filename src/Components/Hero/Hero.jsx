@@ -1,9 +1,15 @@
 import React from 'react';
-import './Hero.style.css';
+import Guide from './Guide/Guide';
+import HeroHead from './HeroHead/HeroHead';
+import Panel from './Panel/Panel';
 
 const Hero = () => {
   return (
-    <div>Hero</div>
+    <React.Fragment>
+      <HeroHead/>
+      <Panel/>
+      <Guide/>
+    </React.Fragment>
   )
 }
 
