@@ -18,11 +18,32 @@ const Search = () => {
     setCountryName(e.target.value)
   }
 
-  const onSubmit = async() => {
-    const response = await fetch('https://fuel-v2.cc.api.here.com/', {
+  // const getData = (method, url, data) => {
+  //   const datas = fetch(url, {
+  //     method: method,
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(data)
+  //   }).then(results => {
+  //     return results.json();
+  //   })
+  //   return datas
+  // }
+
+  const token = process.env.REACT_APP_MY_TOKEN;
+
+  console.log(token)
+
+  const onSubmit = async(e) => {
+    e.preventDefault();
+    console.log('yy')
+    const response = await fetch('https://api.collectapi.com/gasPrice/canada', {
       method: 'GET',
+      mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
       },
       body: JSON.stringify()
     }).then(results => {
@@ -33,11 +54,10 @@ const Search = () => {
 
     console.log(response)
 
-    const resultsStations = response.fuelStations.fuelStation.filter(station => station.address.city === cityName)
-
-    console.log(resultsStations)
-
   }
+
+  // const results = fetch('https://fuel-v2.cc.api.here.com/fuel/stations.json');
+  // console.log(results)
 
   const useLocation = () => {
     navigator.geolocation.getCurrentPosition(currentLocation, error)
@@ -46,6 +66,7 @@ const Search = () => {
   const currentLocation = (position) => {
     setCurrentLatitude(position.coords.latitude);
     setCurrentLongitude(position.coords.longitude);
+    console.log(currentLatitude)
   }
 
   const error = (error) => {
@@ -65,8 +86,8 @@ const Search = () => {
             <input type='text' placeholder='city name' id='city' value={cityName} onChange={(e) => isCityName(e)}/>
             <label>Country:</label>
             <input type='text' placeholder='country' id='country' value={countryName} onChange={(e) => isCountryName(e)}/>
+            <button type='submit'>Find Gas Stations</button>
           </form>
-          <button type='submit'>Find Gas Stations</button>
         </div>
         <p>or</p>
         <div className='location-btn'>
